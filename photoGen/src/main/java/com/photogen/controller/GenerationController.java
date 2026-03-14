@@ -13,5 +13,5 @@ public interface GenerationController {
     StringResponse generateImage(GenerateRequest prompt);
     StringResponse getStatus(String taskId);
     Images getResult(String taskId);
-    StringResponse enhance(MultipartFile file, String prompt) throws Exception;
+    StringResponse enhance(MultipartFile file, String prompt, Boolean withBody) throws Exception;
 }

@@ -37,8 +37,9 @@ public class GenerationControllerImpl implements GenerationController {
     @PostMapping(value = "/enchance", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public StringResponse enhance(
             @RequestPart("file") MultipartFile file,
-            @RequestPart("prompt") String prompt
+            @RequestPart("prompt") String prompt,
+            @RequestPart("withBody") Boolean withBody
     ) throws Exception {
-        return new StringResponse(enchancerService.enhanceFromUpload(file, prompt));
+        return new StringResponse(enchancerService.enhanceFromUpload(file, prompt, withBody));
     }
 }
