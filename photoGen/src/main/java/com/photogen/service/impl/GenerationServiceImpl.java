@@ -8,7 +8,7 @@ import ai.fal.client.queue.QueueSubmitOptions;
 
 import com.google.gson.JsonObject;
 import com.photogen.dto.Images;
-import com.photogen.model.FalApiRequest;
+import com.photogen.dto.requests.GenerateRequest;
 import com.photogen.service.GenerationService;
 
 import lombok.RequiredArgsConstructor;
@@ -28,14 +28,14 @@ public class GenerationServiceImpl implements GenerationService {
     private final ObjectMapper objectMapper;
 
     @Override
-    public String submitPrompt(String prompt) {
+    public String submitPrompt(GenerateRequest generateRequest) {
         String requestId = falClient.queue()
                 .submit(modelId,
                 QueueSubmitOptions.builder()
-                        .input(new FalApiRequest(prompt))
+                        .input(generateRequest)
                         .build()
         ).getRequestId();
-        log.info("Submitted prompt '{}' with requestId {} for model {}", prompt, requestId, modelId);
+        log.info("Submitted prompt '{}' with requestId {} for model {}", generateRequest.prompt(), requestId, modelId);
         return requestId;
     }
 
